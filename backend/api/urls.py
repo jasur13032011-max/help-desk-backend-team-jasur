@@ -12,3 +12,4 @@ urlpatterns = [
     path('tickets/<int:pk>/set-status', TicketSetStatusView.as_view(), name='ticket-set-status'),
     path('replies', ReplyCreateView.as_view(), name='reply-create'),
 ]
+

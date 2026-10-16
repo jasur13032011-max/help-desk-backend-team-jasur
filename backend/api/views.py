@@ -92,6 +92,7 @@ def create_reply(request, pk):
 @permission_classes([IsAuthenticated])
 def set_status(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
+
     new_status = request.data.get('status')
 
     if new_status not in ['open', 'in_progress', 'closed']:

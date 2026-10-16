@@ -32,7 +32,7 @@ class TicketCreateSerializer(serializers.ModelSerializer):
         fields = ('title', 'description')
 
     def validate_title(self, value):
-        if not value.strip():
+        if not value or not value.strip():
             raise serializers.ValidationError("Sarlavha bo'sh bo'lishi mumkin emas.")
         return value
 
@@ -60,3 +60,8 @@ class ReplyCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
         fields = ('ticket', 'body')
+
+    def validate_body(self, value):
+        if not value or not value.strip():
+            raise serializers.ValidationError("Javob matni bo'sh bo'lishi mumkin emas.")
+        return value

@@ -172,3 +172,20 @@ class ReplyCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+class LoginView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'token': str(refresh.access_token),
+                'refresh': str(refresh),
+                'username': user.username
+            }, status=status.HTTP_200_OK)
+        return Response({'error': 'Xato maʼlumot kiritildi'}, status=status.HTTP_400_BAD_REQUEST)

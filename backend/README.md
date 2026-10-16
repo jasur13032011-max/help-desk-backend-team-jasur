@@ -35,3 +35,14 @@ Help Desk tizimi uchun yaratilgan Django REST Framework va JWT token autentifika
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate
+## Testlarni ishga tushirish (API endpointlar va validatsiyani tekshirish)
+
+```bash
+python manage.py test api
+---
+
+### Endi PyCharm terminalida mahalliy ravishda testni va Git'ni bajaramiz:
+
+1. Terminalda quyidagi buyruqni berib ko'ring:
+   ```bash
+   python manage.py test api

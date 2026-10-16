@@ -1,11 +1,14 @@
 from django.urls import path
-from . import views
+from .views import (
+    RegisterView, LoginView, TicketListCreateView,
+    TicketDetailView, TicketSetStatusView, ReplyCreateView
+)
 
 urlpatterns = [
-    path('register', views.register_view),
-    path('login', views.login_view),
-    path('tickets', views.tickets_list_create),
-    path('tickets/<int:pk>', views.ticket_detail),
-    path('tickets/<int:pk>/replies', views.create_reply),
-    path('tickets/<int:pk>/status', views.set_status),
+    path('auth/register', RegisterView.as_view(), name='auth-register'),
+    path('auth/login', LoginView.as_view(), name='auth-login'),
+    path('tickets', TicketListCreateView.as_view(), name='ticket-list-create'),
+    path('tickets/<int:pk>', TicketDetailView.as_view(), name='ticket-detail'),
+    path('tickets/<int:pk>/set-status', TicketSetStatusView.as_view(), name='ticket-set-status'),
+    path('replies', ReplyCreateView.as_view(), name='reply-create'),
 ]

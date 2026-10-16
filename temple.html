@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mini Blog{% endblock %}</title>
+</head>
+<body>
+<header>
+    <h1><a href="/blog/">Mening Blogim</a></h1>
+    <hr>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+{% extends 'base.html' %}
+
+{% block title %}Barcha postlar{% endblock %}
+
+{% block content %}
+    <h2>Postlar ro'yxati</h2>
+    {% for post in posts %}
+        <article>
+            <h3><a href="/blog/{{ post.id }}/">{{ post.sarlavha }}</a></h3>
+            <p><small>{{ post.yaratilgan_vaqt|date:"d.m.Y H:i" }}</small></p>
+            <p>{{ post.matn|truncatewords:20 }}</p>
+        </article>
+        <hr>
+    {% empty %}
+        <p>Hozircha hech qanday post yo'q.</p>
+    {% endfor %}
+{% endblock %}
+{% extends 'base.html' %}
+
+{% block title %}{{ post.sarlavha }}{% endblock %}
+
+{% block content %}
+    <article>
+        <h2>{{ post.sarlavha }}</h2>
+        <p><small>Chop etilgan vaqti: {{ post.yaratilgan_vaqt|date:"d.m.Y H:i" }}</small></p>
+        <div>
+            <p>{{ post.matn }}</p>
+        </div>
+    </article>
+    <br>
+    <a href="/blog/">← Ortga qaytish</a>
+{% endblock %}
+</body>
+</html>
